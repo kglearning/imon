@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Imon</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+  </head>
+  <body>
+    <div class="container">
+      <div class="jumbotron">
+        <h1 class="text-center">Imon 爱蒙幼儿园</h1>
+      </div>
+
+    <!-- Section 1 Angela and Edward -->
+        <div class="row text-center">
+          <div class="col-sm">
+            <h2>Angela</h2>
+            <button type="button" id="play" class="btn btn-primary">Play</button>
+            <!--
+            <audio controls>
+                <source src="sounds/angela.ogg" type="audio/ogg">
+                Your browser does not support the audio element.
+            </audio>
+            -->
+          </div>
+
+          </div>
+
+
+
+          </div>
+        </div>
+
+    <!-- Optional JavaScript -->
+    <script>
+      var getPageName = window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1);
+      var studentName = getPageName.substr(0, getPageName.length - 5);
+      var req = new XMLHttpRequest();
+      req.open('GET', './sounds/' + studentName + '.ogg', true);
+      req.responseType = 'blob';
+
+      req.onload = function() {
+         // Onload is triggered even on 404
+         // so we need to check the status code
+         if (this.status === 200) {
+            var videoBlob = this.response;
+            var vid = URL.createObjectURL(videoBlob); // IE10+
+            // Video is now downloaded
+            // and we can set it as source on the video element
+            audio.src = vid;
+         }
+      }
+      req.onerror = function() {
+         // Error
+      }
+
+      req.send();
+    </script>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="./js/jquery-3.2.1.slim.min.js"</script>
+    <script src="./js/popper.min.js"</script>
+    <script src="./js/bootstrap.min.js"</script>
+  </body>
+</html>
