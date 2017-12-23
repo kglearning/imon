@@ -39,7 +39,7 @@
     <script>
       var getPageName = window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1);
       var studentName = getPageName.substr(0, getPageName.length - 5);
-      createPlayButton(audioObject) {
+      function createPlayButton(audioObject) {
           playButton = document.getElementById("play")
           playButton.addEventListener("click", audioObject.play());
       }
