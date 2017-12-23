@@ -54,7 +54,7 @@
             //audio.src = vid;
             var audio = new Audio(URL.createObjectURL(this.response));
             audio.load();
-            
+            audio.play();
          }
       }
       req.onerror = function() {
