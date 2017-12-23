@@ -40,8 +40,11 @@
       var getPageName = window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1);
       var studentName = getPageName.substr(0, getPageName.length - 5);
       function createPlayButton(audioObject) {
-          playButton = document.getElementById("play")
-          playButton.addEventListener("click", audioObject.play());
+          playButton = document.getElementById("play");
+          playButton.addEventListener("click", function playAudio() {
+            audioObject.play();
+          });
+
       }
       var req = new XMLHttpRequest();
       req.open('GET', './sounds/' + studentName + '.ogg', true);
