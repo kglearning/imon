@@ -61,11 +61,12 @@
         triggered we define and call a new function which plays
         the audioObject.
       */
+      function playAudio(audioObject2) {
+        audioObject.play();
+      }
       function createPlayButton(audioObject) {
           playButton = document.getElementById("play");
-          playButton.addEventListener("click", function() {
-            audioObject.play();
-          });
+          playButton.addEventListener("click", playAudio(audioObject) );
 
       }
 
