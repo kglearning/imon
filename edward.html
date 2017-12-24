@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Imon</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap 4 Beta CSS -->
+    <link rel="stylesheet" href="./css/bootstrap.min.css">
+  </head>
+  <body>
+
+    <!-- Lazy formatting with Bootstrap 4 Beta.
+    Creating a container, jumbotron, and centering -->
+    <div class="container">
+      <div class="jumbotron">
+        <h1 class="text-center">Imon 爱蒙幼儿园</h1>
+      </div>
+
+    <!-- Lazy formatting with Bootstrap 4 Beta.
+    Students Section -->
+        <div class="row text-center">
+          <div class="col-sm">
+            <h2>Edward</h2>
+            <button type="button" id="play" class="btn btn-primary">Play</button>
+          </div>
+
+          </div>
+
+
+
+          </div>
+        </div>
+
+    <!-- JavaScript after the page loads -->
+
+    <script>
+    /*
+      This script has been purposly left un-minified, sourced, and
+      commented directly on this page. Why? a few reasons... I'm
+      not trying to hide my source. At the very least the comments
+      are here for educational purposes, but mainly all this was
+      done because I'm lazy and didn't want to tab between multiple
+      source files. So the JS was lazily left here. Deal with it.
+    */
+
+
+      /*
+        Here we get the name of the current page then cut off the ".html"
+        part, and apply this value to the audio files source name.
+      */
+      var getPageName = window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1);
+      var studentName = getPageName.substr(0, getPageName.length - 5);
+
+      /*
+        Here we define the function createPlayButton and specify
+        that it's going to take an argument from the XHR request
+        which will be calling it. We add an event listener to the
+        play button looking for a mouse click. When the event is
+        triggered we define and call a new function which plays
+        the audioObject.
+      */
+      function createPlayButton(audioObject) {
+          playButton = document.getElementById("play");
+          playButton.addEventListener("click", function playAudio() {
+            audioObject.play();
+          });
+
+      }
+
+      /*
+         The target users have slow internet so it's necessary to
+         download/cache the audio files first instead of having the
+         clients press play and wait 30 seconds, possibly minutes, for
+         the audio to download in the background before it plays.
+
+         This script downloads the resource from the server to the
+         clients machine and loads it from the clients machine before
+         the client presses the play button.
+
+         This approach was chosen since service workers are still
+         a little too new for production environments, and I don't
+         like application cache which is all but removed from
+         modern browsers.
+      */
+      var req = new XMLHttpRequest();
+      req.open('GET', './sounds/' + studentName + '.ogg', true);
+      req.responseType = 'blob';
+
+      req.onload = function() {
+        if (this.status === 200) {
+            var audio = new Audio(URL.createObjectURL(this.response));
+            audio.load();
+            createPlayButton(audio);
+         }
+      }
+      req.onerror = function() {
+
+      }
+
+      req.send();
+    </script>
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="./js/jquery-3.2.1.slim.min.js"</script>
+    <script src="./js/popper.min.js"</script>
+    <script src="./js/bootstrap.min.js"</script>
+  </body>
+</html>
