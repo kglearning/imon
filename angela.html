@@ -23,7 +23,7 @@
         <div class="row text-center">
           <div class="col-sm">
             <h2>Angela</h2>
-            <button type="button" id="playSound101" class="btn btn-primary">Play</button>
+            <button type="button" id="play" class="btn btn-primary">Play</button>
           </div>
 
           </div>
@@ -61,17 +61,12 @@
         triggered we define and call a new function which plays
         the audioObject.
       */
+      function createPlayButton(audioObject) {
+          playButton = document.getElementById("play");
+          playButton.addEventListener("click", function playAudio() {
+            audioObject.play();
+          });
 
-      function createPlayButton(objectAudio101) {
-          var playButton = document.getElementById("playSound101");
-          playButton.addEventListener("click", function() {
-                                      objectAudio101.play();
-                                    }, false );
-
-      }
-
-      function playAudio(audioObject2) {
-        audioObject2.play();
       }
 
       /*
@@ -90,15 +85,14 @@
          modern browsers.
       */
       var req = new XMLHttpRequest();
-      // req.open('GET', './sounds/' + studentName + '.ogg', true);
-      req.open('GET', 'https://kglearning.github.io/imon/sounds/angela.ogg', true);
+      req.open('GET', './sounds/' + studentName + '.m4a', true);
       req.responseType = 'blob';
 
       req.onload = function() {
         if (this.status === 200) {
-            var audio101ba = new Audio(URL.createObjectURL(this.response));
-            audio101ba.load();
-            createPlayButton(audio101ba);
+            var audio = new Audio(URL.createObjectURL(this.response));
+            audio.load();
+            createPlayButton(audio);
          }
       }
       req.onerror = function() {
