@@ -25,8 +25,7 @@
         <div class="row text-center">
           <div class="col-sm">
             <h2>Angela 王馨梓</h2><br>
-            <h2 id="load1">Loading... Please Wait!</h2>
-            <h2 id="load2">缓冲中... 请稍等!</h2>
+            <h4 class="alert alert-info" role="alert" id="load1">Loading... Please Wait! - 缓冲中... 请稍等!</h4>
             <button type="button" id="play" class="btn btn-primary">Play</button>
           </div>
 
@@ -57,7 +56,6 @@
       */
       var playButton = document.getElementById("play");
       var hideh2 = document.getElementById("load1");
-      var hideh2ch = document.getElementById("load2");
       var getPageName = window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1);
       var studentName = getPageName.substr(0, getPageName.length - 5);
 
