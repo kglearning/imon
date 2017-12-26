@@ -24,7 +24,9 @@
     Students Section -->
         <div class="row text-center">
           <div class="col-sm">
-            <h2>Angela 王馨梓</h2>
+            <h2>Angela 王馨梓</h2><br>
+            <h2 id="load1">Loading... Please Wait!</h2>
+            <h2 id="load2">缓冲中... 请稍等!</h2>
             <button type="button" id="play" class="btn btn-primary">Play</button>
           </div>
 
@@ -50,8 +52,12 @@
 
       /*
         Here we get the name of the current page then cut off the ".html"
-        part, and apply this value to the audio files source name.
+        part, and apply this value to the audio files source name. Oh!
+        and we also define playButton here.
       */
+      var playButton = document.getElementById("play");
+      var hideh2 = document.getElementById("load1");
+      var hideh2ch = document.getElementById("load2");
       var getPageName = window.location.pathname.substring(window.location.pathname.lastIndexOf('/') + 1);
       var studentName = getPageName.substr(0, getPageName.length - 5);
 
@@ -64,7 +70,6 @@
         the audioObject.
       */
       function createPlayButton(audioObject) {
-          playButton = document.getElementById("play");
           playButton.addEventListener("click", function playAudio() {
             audioObject.play();
           });
@@ -86,6 +91,8 @@
          like application cache which is all but removed from
          modern browsers.
       */
+
+      playButton.disabled = true;
       var req = new XMLHttpRequest();
       req.open('GET', './sounds/' + studentName + '.m4a', true);
       req.responseType = 'blob';
@@ -94,6 +101,9 @@
         if (this.status === 200) {
             var audio = new Audio(URL.createObjectURL(this.response));
             audio.load();
+            hideh2.style.display = 'none';
+            hideh2ch.style.display = 'none';
+            playButton.disabled = false;
             createPlayButton(audio);
          }
       }
