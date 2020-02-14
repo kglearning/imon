@@ -1,0 +1,6 @@
+# Ignore ffmpeg and ffmpeg script #
+###################
+sounds/ffmpeg
+sounds/m4atomp3
+*.DS_Store
+sounds/*.DS_Store
